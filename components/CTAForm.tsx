@@ -1,5 +1,7 @@
 "use client";
 
+import Script from "next/script";
+import flodesk from "./consultation-flodesk.json";
 import { useState, type FormEvent } from "react";
 import { ArrowDownIcon } from "./Icons";
 
@@ -32,6 +34,15 @@ const fieldLabels: Record<keyof FormData, string> = {
   message: "Anything You Want to Say",
 };
 
+const flodeskFields: Record<keyof FormData, string> = {
+  fullName: "firstName",
+  email: "email",
+  whatsapp: "fields.whatsappNumber",
+  businessName: "fields.businessName",
+  url: "fields.websiteOrFacebookLink",
+  message: "fields.anythingYouWantToSay"
+};
+
 const fieldTypes: Partial<Record<keyof FormData, string>> = {
   email: "email",
   whatsapp: "tel",
@@ -50,7 +61,7 @@ const placeholders: Record<keyof FormData, string> = {
 function validate(values: FormData): FormErrors {
   const errors: FormErrors = {};
   (Object.keys(fieldLabels) as (keyof FormData)[]).forEach((field) => {
-    if (field !== "url" && field !== "message" && !values[field].trim()) {
+    if (!values[field].trim()) {
       errors[field] = `${fieldLabels[field]} is required.`;
     }
   });
@@ -77,16 +88,13 @@ export default function CTAForm() {
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
     const nextErrors = validate(values);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) {
-      const firstInvalidKey = Object.keys(nextErrors)[0] as keyof FormData;
-      const firstInvalid = firstInvalidKey === "fullName" ? "fullName" : firstInvalidKey;
-      document.getElementById(firstInvalid)?.focus();
-      return;
+      event.preventDefault();
+      event.stopPropagation();
+      document.getElementById(Object.keys(nextErrors)[0])?.focus();
     }
-    window.location.assign("/thank-you?demo=1");
   }
 
   return (
@@ -105,60 +113,82 @@ export default function CTAForm() {
           <p className="aside-small">A customized AI marketing plan, built around your business.</p>
           <div className="aside-orbit" aria-hidden="true"><span /><span /><span /></div>
         </aside>
-        <form className="consultation-form" onSubmit={handleSubmit} noValidate>
-          <div className="form-heading">
-            <span className="form-step">YOUR DETAILS <span>·</span> 01 OF 01</span>
-            <h3>Tell us a little about you.</h3>
-            <p>We’ll be in touch about your free consultation.</p>
-          </div>
-          <div className="form-grid">
-            {(Object.keys(fieldLabels) as (keyof FormData)[]).map((field) => {
-              const isTextarea = field === "message";
-              const isRequired = field !== "url" && field !== "message";
-              const error = errors[field];
-              const fieldId = field === "fullName" ? "fullName" : field;
-              return (
-                <div className={`form-field ${field === "message" ? "form-field-wide" : ""}`} key={field}>
-                  <label htmlFor={fieldId}>{fieldLabels[field]}{isRequired && <span className="required-mark"> *</span>}</label>
-                  {isTextarea ? (
-                    <textarea
-                      id={fieldId}
-                      name={field}
-                      rows={4}
-                      placeholder={placeholders[field]}
-                      value={values[field]}
-                      onChange={(event) => updateField(field, event.target.value)}
-                      aria-invalid={Boolean(error)}
-                      aria-describedby={error ? `${field}-error` : undefined}
-                    />
-                  ) : (
-                    <input
-                      id={fieldId}
-                      name={field}
-                      type={fieldTypes[field] || "text"}
-                      autoComplete={field === "fullName" ? "name" : field === "email" ? "email" : field === "whatsapp" ? "tel" : field === "businessName" ? "organization" : "url"}
-                      inputMode={field === "whatsapp" ? "tel" : undefined}
-                      placeholder={placeholders[field]}
-                      value={values[field]}
-                      onChange={(event) => updateField(field, event.target.value)}
-                      required={isRequired}
-                      aria-invalid={Boolean(error)}
-                      aria-describedby={error ? `${field}-error` : undefined}
-                    />
-                  )}
-                  {error && <span className="field-error" id={`${field}-error`} role="alert">{error}</span>}
-                </div>
-              );
-            })}
-          </div>
-          <div className="form-footer">
-            <button type="submit" className="button button-primary form-submit">
-              Book Free Consultation <ArrowDownIcon className="button-icon button-icon-up" />
-            </button>
-            <p className="privacy-line"><span className="privacy-lock">◈</span> We respect your privacy. No spam.</p>
-            <p className="demo-note">Demo form only. Your details are not saved or sent.</p>
-          </div>
-        </form>
+        <div
+          data-consultation-flodesk={flodesk.id}
+          data-ff-el="root"
+          data-ff-version="3"
+          data-ff-type="inline"
+          data-ff-name="inlineNoImage"
+          data-ff-stage="default"
+        >
+          <div data-ff-el="config" data-ff-config={flodesk.config} hidden />
+          <form className="consultation-form" action={flodesk.action} method="post" data-ff-el="form" onSubmitCapture={handleSubmit}>
+            <div className="form-heading">
+              <span className="form-step">YOUR DETAILS <span>·</span> 01 OF 01</span>
+              <h3>Tell us a little about you.</h3>
+              <p>We’ll be in touch about your free consultation.</p>
+            </div>
+            <div className="fd-form-content" data-ff-el="content">
+              <div className="form-grid" data-ff-el="fields">
+                {(Object.keys(fieldLabels) as (keyof FormData)[]).map((field) => {
+                  const isTextarea = field === "message";
+                  const error = errors[field];
+                  const fieldId = field;
+                  return (
+                    <div className={`form-field fd-form-group ${field === "message" ? "form-field-wide" : ""}`} key={field}>
+                      <label htmlFor={fieldId}>{fieldLabels[field]}<span className="required-mark"> *</span></label>
+                      {isTextarea ? (
+                        <textarea
+                          id={fieldId}
+                          name={flodeskFields[field]}
+                          className="fd-form-control"
+                          maxLength={255}
+                          rows={4}
+                          required
+                          placeholder={placeholders[field]}
+                          value={values[field]}
+                          onChange={(event) => updateField(field, event.target.value)}
+                          aria-invalid={Boolean(error)}
+                          aria-describedby={error ? `${field}-error` : undefined}
+                        />
+                      ) : (
+                        <input
+                          id={fieldId}
+                          name={flodeskFields[field]}
+                          className="fd-form-control"
+                          maxLength={255}
+                          type={fieldTypes[field] || "text"}
+                          autoComplete={field === "fullName" ? "name" : field === "email" ? "email" : field === "whatsapp" ? "tel" : field === "businessName" ? "organization" : "url"}
+                          inputMode={field === "whatsapp" ? "tel" : undefined}
+                          placeholder={placeholders[field]}
+                          value={values[field]}
+                          onChange={(event) => updateField(field, event.target.value)}
+                          required
+                          aria-invalid={Boolean(error)}
+                          aria-describedby={error ? `${field}-error` : undefined}
+                        />
+                      )}
+                      {error && <span className="field-error" id={`${field}-error`} role="alert">{error}</span>}
+                    </div>
+                  );
+                })}
+                <input type="text" name="confirm_email_address" autoComplete="off" tabIndex={-1} hidden />
+              </div>
+              <div className="form-footer" data-ff-el="footer">
+                <button type="submit" className="button button-primary form-submit" data-ff-el="submit">
+                  Book Free Consultation <ArrowDownIcon className="button-icon button-icon-up" />
+                </button>
+                <p className="privacy-line"><span className="privacy-lock">◈</span> We respect your privacy. No spam.</p>
+              </div>
+            </div>
+            <p className="fd-form-success" data-ff-el="success" role="status">Thanks for submitting your request. Check your email to confirm your address.</p>
+            <div data-ff-el="error" className="field-error fd-form-error" role="alert" />
+          </form>
+        </div>
+        <Script
+          src="/consultation-flodesk.js"
+          onReady={() => (window as Window & { initConsultationForm?: () => void }).initConsultationForm?.()}
+        />
       </div>
     </section>
   );

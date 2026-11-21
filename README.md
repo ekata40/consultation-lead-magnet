@@ -15,4 +15,6 @@ Import this project into Vercel and deploy with the default Next.js settings. Se
 
 ## Form behavior
 
-The form checks required fields, email format, WhatsApp number, and an optional URL, then opens `/thank-you?demo=1`. It does not send or store submissions. Connect a backend or form service before collecting real leads.
+The consultation form submits to the Flodesk form in `components/consultation-flodesk.json`. The Full Name field maps to Flodesk’s First Name field. The website or Facebook link and message are required by the supplied Flodesk form.
+
+In Flodesk, assign the consultation form to your segment and publish the workflow with that segment as its trigger. The embed has double opt-in enabled, so test with a fresh email address you control and click the confirmation link before checking the workflow. [Flodesk workflow setup](https://help.flodesk.com/en/articles/4405825)

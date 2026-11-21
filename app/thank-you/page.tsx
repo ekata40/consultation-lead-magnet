@@ -24,9 +24,9 @@ export default function ThankYouPage() {
       <main className="thankyou-page">
         <section className="thankyou-card" aria-labelledby="thankyou-title">
           <p className="section-kicker">Your next step</p>
-          <h1 id="thankyou-title">Thank you for visiting our site.</h1>
+          <h1 id="thankyou-title">Thanks for your consultation request.</h1>
           <p className="thankyou-copy">
-            This demo form doesn’t send or save your details. Message us on WhatsApp to discuss your free AI marketing consultation and next steps.
+            Check your inbox for an email from us. If you receive a confirmation link, click it to confirm your email address. You can also reach us on WhatsApp.
           </p>
           <a className="button button-whatsapp" href={whatsappHref} target="_blank" rel="noopener noreferrer">
             <MessageIcon className="button-icon" /> Message Us on WhatsApp
