@@ -5,6 +5,20 @@
     const root = document.querySelector("[data-consultation-flodesk]");
     if (!root || handled.has(root)) return;
 
+    const form = root.querySelector('[data-ff-el="form"]');
+    const thankYouUrl = new URL("/thank-you", window.location.origin).href;
+
+    // Flodesk can return a redirect to the configured domain. Use this site's
+    // thank-you page when Flodesk marks the submission as successful.
+    const successObserver = new MutationObserver(() => {
+      if (root.dataset.ffStage === "success" || form.classList.contains("fd-has-success")) {
+        successObserver.disconnect();
+        window.location.assign(thankYouUrl);
+      }
+    });
+    successObserver.observe(root, { attributes: true, attributeFilter: ["data-ff-stage"] });
+    successObserver.observe(form, { attributes: true, attributeFilter: ["class"] });
+
     if (!window.fd) {
       window.FlodeskObject = "fd";
       window.fd = function () {
@@ -21,7 +35,7 @@
     handled.add(root);
     window.fd("form:handle", {
       formId: root.dataset.consultationFlodesk,
-      rootEl: "[data-consultation-flodesk]",
+      rootEl: root,
     });
   };
 

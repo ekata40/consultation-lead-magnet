@@ -28,6 +28,15 @@ export default function ThankYouPage() {
           <p className="thankyou-copy">
             Check your inbox for an email from us. If you receive a confirmation link, click it to confirm your email address. You can also reach us on WhatsApp.
           </p>
+          <video
+            className="thankyou-video"
+            aria-label="What happens after you request a consultation"
+            controls
+            playsInline
+            preload="metadata"
+            poster="/consultation-demo-poster.jpg"
+            src="/consultation-demo.mp4"
+          />
           <a className="button button-whatsapp" href={whatsappHref} target="_blank" rel="noopener noreferrer">
             <MessageIcon className="button-icon" /> Message Us on WhatsApp
           </a>

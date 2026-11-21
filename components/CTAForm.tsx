@@ -172,6 +172,8 @@ export default function CTAForm() {
                     </div>
                   );
                 })}
+                {/* Flodesk discovers field names from inputs before serializing the form. */}
+                <input type="hidden" name={flodeskFields.message} disabled />
                 <input type="text" name="confirm_email_address" autoComplete="off" tabIndex={-1} hidden />
               </div>
               <div className="form-footer" data-ff-el="footer">
@@ -181,7 +183,7 @@ export default function CTAForm() {
                 <p className="privacy-line"><span className="privacy-lock">◈</span> We respect your privacy. No spam.</p>
               </div>
             </div>
-            <p className="fd-form-success" data-ff-el="success" role="status">Thanks for submitting your request. Check your email to confirm your address.</p>
+            <p className="fd-form-success" data-ff-el="success" role="status">Thanks for submitting your request. Check your inbox for an email from us.</p>
             <div data-ff-el="error" className="field-error fd-form-error" role="alert" />
           </form>
         </div>
