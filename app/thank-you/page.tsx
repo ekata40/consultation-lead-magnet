@@ -38,11 +38,6 @@ export default function ThankYouPage() {
             playsInline
             controls
           />
-          <p className="thankyou-copy">
-            <a className="thankyou-link" href="https://youtube.com/shorts/1zdWOsr737I" target="_blank" rel="noopener noreferrer">
-              Watch on YouTube Shorts
-            </a>
-          </p>
           <a className="button button-whatsapp" href={whatsappHref} target="_blank" rel="noopener noreferrer">
             <MessageIcon className="button-icon" /> Message Us on WhatsApp
           </a>
