@@ -28,19 +28,25 @@ export default function ThankYouPage() {
           <p className="thankyou-copy">
             Check your inbox for an email from us. If you receive a confirmation link, click it to confirm your email address. You can also reach us on WhatsApp.
           </p>
-          <video
+          <iframe
             className="thankyou-video"
-            aria-label="What happens after you request a consultation"
-            controls
-            playsInline
-            preload="metadata"
-            poster="/consultation-demo-poster.jpg"
-            src="/consultation-demo.mp4"
+            title="What happens after you request a consultation"
+            src="https://www.youtube.com/embed/1zdWOsr737I"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allow="encrypted-media; picture-in-picture; web-share"
+            allowFullScreen
           />
+          <p className="thankyou-copy">
+            <a className="thankyou-link" href="https://youtube.com/shorts/1zdWOsr737I" target="_blank" rel="noopener noreferrer">
+              Watch on YouTube Shorts
+            </a>
+          </p>
           <a className="button button-whatsapp" href={whatsappHref} target="_blank" rel="noopener noreferrer">
             <MessageIcon className="button-icon" /> Message Us on WhatsApp
           </a>
-          <p className="thankyou-number">+977 9803269190</p>
+          <p className="thankyou-number">
+            <a className="thankyou-link" href={whatsappHref} target="_blank" rel="noopener noreferrer">+977 9803269190</a>
+          </p>
         </section>
       </main>
     </>

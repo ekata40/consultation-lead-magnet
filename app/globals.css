@@ -145,7 +145,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .thankyou-sparkle { width: 26px; height: 26px; }
 .thankyou-card h1 { margin: 0; font-family: var(--serif); font-size: clamp(34px, 5vw, 48px); letter-spacing: -2.1px; line-height: 1.12; text-wrap: balance; }
 .thankyou-copy { max-width: 410px; margin: 15px auto 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
-.thankyou-video { display: block; width: 100%; aspect-ratio: 16 / 9; margin: 22px auto 0; border-radius: 10px; background: #11373b; }
+.thankyou-video { display: block; width: 100%; aspect-ratio: 16 / 9; margin: 22px auto 0; border: 0; border-radius: 10px; background: #11373b; }
+.thankyou-link { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 3px; }
 .button-whatsapp { margin-top: 27px; color: #fff; background: #198b61; box-shadow: 0 7px 19px rgba(25,139,97,.16); }
 .button-whatsapp:hover { background: #137851; box-shadow: 0 10px 25px rgba(25,139,97,.23); }
 .thankyou-number { margin: 10px 0 0; color: #8a9187; font-size: 11px; }
