@@ -39,9 +39,6 @@ export default function ThankYouPage() {
           <a className="button button-whatsapp" href={whatsappHref} target="_blank" rel="noopener noreferrer">
             <MessageIcon className="button-icon" /> Message Us on WhatsApp
           </a>
-          <p className="thankyou-number">
-            <a className="thankyou-link" href={whatsappHref} target="_blank" rel="noopener noreferrer">+977 9803269190</a>
-          </p>
         </section>
       </main>
     </>
