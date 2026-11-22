@@ -20,7 +20,7 @@ function landing() {
 }
 
 function thankYou() {
-  return shell("Thank You | Unity", `<main class="thanks"><section class="card thanks-card"><div class="kicker">Your next step</div><h1>Thanks for your consultation request.</h1><p>Check your inbox for an email from us. If you receive a confirmation link, click it to confirm your email address. You can also reach us on WhatsApp.</p><video class="thankyou-video" aria-label="What happens after you request a consultation" src="/consultation-demo.mp4" poster="/consultation-demo-poster.jpg" autoplay muted playsinline controls></video><a class="btn whatsapp" href="${waLink}" target="_blank" rel="noopener noreferrer">☏ &nbsp; Message Us on WhatsApp</a><p class="phone"><a href="${waLink}" target="_blank" rel="noopener noreferrer"><u>+977 9803269190</u></a></p></section></main>`);
+  return shell("Thank You | Unity", `<main class="thanks"><section class="card thanks-card"><div class="kicker">Your next step</div><h1>Thanks for your consultation request.</h1><p>Check your inbox for an email from us. If you receive a confirmation link, click it to confirm your email address. You can also reach us on WhatsApp.</p><iframe class="thankyou-video" title="What happens after you request a consultation" src="https://www.youtube.com/embed/1zdWOsr737I?autoplay=1&amp;mute=1&amp;playsinline=1" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><a class="btn whatsapp" href="${waLink}" target="_blank" rel="noopener noreferrer">☏ &nbsp; Message Us on WhatsApp</a><p class="phone"><a href="${waLink}" target="_blank" rel="noopener noreferrer"><u>+977 9803269190</u></a></p></section></main>`);
 }
 
 createServer((req, res) => {
