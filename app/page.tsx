@@ -16,7 +16,14 @@ export default function HomePage() {
         <Process />
         <CTAForm />
       </main>
-      <footer className="site-footer"><a href="/" className="footer-brand">unity<span>.</span></a><span>Clearer marketing starts with a conversation.</span></footer>
+      <footer className="site-footer">
+        <a href="/" className="footer-brand">unity<span>.</span></a>
+        <span>Clearer marketing starts with a conversation.</span>
+        <nav className="footer-socials" aria-label="Social media">
+          <a href="https://www.facebook.com/profile.php?id=61584779434369">Facebook</a>
+          <a href="https://www.instagram.com/upadhyayekta40/">Instagram</a>
+        </nav>
+      </footer>
     </>
   );
 }

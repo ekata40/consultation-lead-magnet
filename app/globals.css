@@ -138,6 +138,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .site-footer { min-height: 88px; display: flex; align-items: center; justify-content: center; gap: 14px; border-top: 1px solid #edede8; color: #9a9d95; font-size: 11px; }
 .footer-brand { color: #414a3e; font-family: var(--serif); font-size: 17px; font-weight: 800; letter-spacing: -1px; }
+.site-footer { flex-wrap: wrap; padding: 16px; }
+.footer-socials { display: flex; gap: 14px; color: var(--accent); }
+.footer-socials a { text-decoration: underline; text-underline-offset: 3px; }
 
 .thankyou-page { position: relative; min-height: calc(100vh - 82px); padding: 68px 24px 35px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(ellipse at 50% 35%, #f2f4ed, var(--bg) 62%); }
 .thankyou-card { position: relative; z-index: 1; width: min(100%, 570px); padding: 52px 52px 47px; border: 1px solid #eceee8; border-radius: 14px; background: rgba(255,254,253,.92); box-shadow: 0 18px 54px rgba(36,46,31,.065); text-align: center; }
