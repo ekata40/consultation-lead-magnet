@@ -29,7 +29,7 @@ function landing() {
 }
 
 function thankYou() {
-  return shell("Thank You | Unity", `<main class="thanks"><section class="card thanks-card"><div class="kicker">Your next step</div><h1>Thanks for your consultation request.</h1><p>Check your inbox for an email from us. If you receive a confirmation link, click it to confirm your email address. You can also reach us on WhatsApp.</p><iframe class="thankyou-video" title="What happens after you request a consultation" src="https://www.youtube.com/embed/1zdWOsr737I?autoplay=1&amp;mute=1&amp;playsinline=1" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe><a class="btn whatsapp" href="${waLink}" target="_blank" rel="noopener noreferrer">☏ &nbsp; Message Us on WhatsApp</a></section></main>`);
+  return shell("Thank You | Unity", `<main class="thanks"><section class="card thanks-card"><div class="kicker">Your next step</div><h1>Thanks for your consultation request.</h1><p>Check your inbox for an email from us. If you receive a confirmation link, click it to confirm your email address. You can also reach us on WhatsApp.</p><video class="thankyou-video" aria-label="What happens after you request a consultation" playsinline controls preload="metadata"><source src="/thank-you-video.mp4" type="video/mp4"></video><a class="btn whatsapp" href="${waLink}" target="_blank" rel="noopener noreferrer">☏ &nbsp; Message Us on WhatsApp</a></section></main>`);
 }
 
 createServer((req, res) => {
@@ -44,7 +44,7 @@ createServer((req, res) => {
     res.end(readFileSync(new URL("./public/consultation-flodesk.js", import.meta.url)));
     return;
   }
-  if (path === "/consultation-demo.mp4" || path === "/consultation-demo-poster.jpg") {
+  if (path === "/thank-you-video.mp4" || path === "/consultation-demo.mp4" || path === "/consultation-demo-poster.jpg") {
     const type = path.endsWith(".mp4") ? "video/mp4" : "image/jpeg";
     res.writeHead(200, { "Content-Type": type });
     res.end(readFileSync(new URL("./public" + path, import.meta.url)));
