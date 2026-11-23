@@ -180,8 +180,8 @@ export default function CTAForm() {
                 <button type="submit" className="button button-primary form-submit" data-ff-el="submit">
                   Book Free Consultation <ArrowDownIcon className="button-icon button-icon-up" />
                 </button>
-                <p className="privacy-line"><span className="privacy-lock">◈</span> We respect your privacy. No spam.</p>
               </div>
+              <p className="privacy-line"><span className="privacy-lock" aria-hidden="true">◈</span> Your details are securely submitted through Flodesk.</p>
             </div>
             <p className="fd-form-success" data-ff-el="success" role="status">Thanks for submitting your request. Check your inbox for an email from us.</p>
             <div data-ff-el="error" className="field-error fd-form-error" role="alert" />
