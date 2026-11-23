@@ -2,6 +2,15 @@ import { createServer } from "node:http";
 import { readFileSync } from "node:fs";
 
 const port = Number(process.env.PORT || 3000);
+const socialLinks = JSON.parse(readFileSync(new URL("./components/social-links.json", import.meta.url), "utf8"));
+const socialNav = `<nav class="social-links" aria-label="Social media">${socialLinks.map(({ label, url }) =>
+  `<a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`
+).join("")}</nav>`;
+const socialCss = `<style>
+  .social-links { display: flex; justify-content: center; gap: 12px; padding: 0 16px 12px; }
+  .social-links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid #b4d8dc; border-radius: 8px; color: #075d69; font-size: 14px; font-weight: 700; }
+  .social-links a:hover { background: #e5f4f5; }
+</style>`;
 const waMessage = encodeURIComponent("Hi, I just submitted the form for the Free Digital Marketing Consultation. I'd like to know the next steps.");
 const waLink = `https://wa.me/9779803269190?text=${waMessage}`;
 const css = `
@@ -47,7 +56,7 @@ createServer((req, res) => {
     return;
   }
   res.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" });
-  res.end(isThanks ? thankYou() : landing());
+  res.end(isThanks ? thankYou() : landing().replace("</head>", `${socialCss}</head>`).replace("</header>", `</header>${socialNav}`));
 }).listen(port, "127.0.0.1", () => {
   console.log(`Unity preview running at http://localhost:${port}`);
 });
