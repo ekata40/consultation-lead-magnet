@@ -33,7 +33,21 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <script defer src="/meta-pixel.js" />
+      </head>
+      <body>
+        <noscript>
+          <img
+            src="https://www.facebook.com/tr?id=2321381885071047&ev=PageView&noscript=1"
+            width={1}
+            height={1}
+            style={{ display: "none" }}
+            alt=""
+          />
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }

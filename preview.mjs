@@ -19,7 +19,7 @@ const css = `
 `;
 
 function shell(title, content) {
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#fbfaf8"><meta name="description" content="Book a free AI marketing consultation and get practical next steps tailored to your business."><meta property="og:title" content="Free AI Marketing Consultation | Unity"><meta property="og:description" content="Get a practical marketing plan tailored to your business."><title>${title}</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>${css}</style></head><body><header class="header"><a class="brand" href="/" aria-label="Unity"><img src="/unity-logo.png" alt="The Unity"></a></header>${content}</body></html>`;
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#fbfaf8"><meta name="description" content="Book a free AI marketing consultation and get practical next steps tailored to your business."><meta property="og:title" content="Free AI Marketing Consultation | Unity"><meta property="og:description" content="Get a practical marketing plan tailored to your business."><title>${title}</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>${css}</style><script defer src="/meta-pixel.js"></script></head><body><noscript><img src="https://www.facebook.com/tr?id=2321381885071047&amp;ev=PageView&amp;noscript=1" width="1" height="1" style="display:none" alt=""></noscript><header class="header"><a class="brand" href="/" aria-label="Unity"><img src="/unity-logo.png" alt="The Unity"></a></header>${content}</body></html>`;
 }
 
 const flodesk = JSON.parse(readFileSync(new URL("./components/consultation-flodesk.json", import.meta.url), "utf8"));
@@ -34,6 +34,11 @@ function thankYou() {
 
 createServer((req, res) => {
   const path = new URL(req.url || "/", `http://${req.headers.host}`).pathname;
+  if (path === "/meta-pixel.js") {
+    res.writeHead(200, { "Content-Type": "text/javascript; charset=utf-8" });
+    res.end(readFileSync(new URL("./public/meta-pixel.js", import.meta.url)));
+    return;
+  }
   if (path === "/consultation-flodesk.js") {
     res.writeHead(200, { "Content-Type": "text/javascript; charset=utf-8" });
     res.end(readFileSync(new URL("./public/consultation-flodesk.js", import.meta.url)));
